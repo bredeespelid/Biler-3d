@@ -1,0 +1,314 @@
+<title>Bilbibliotek 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: showroom — model rail on the left, a turntable stage on the right, spec plate pinned under the stage */
+:root {
+  --bg: #eef0f2;
+  --surface: #ffffff;
+  --ink: #15191e;
+  --muted: #5d6670;
+  --line: #d5dadf;
+  --accent: #0b5cad;
+  --stage: radial-gradient(120% 90% at 50% 20%, #ffffff 0%, #dfe3e7 70%, #cfd4d9 100%);
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1215; --surface: #171b20; --ink: #e8ecef; --muted: #96a0aa; --line: #2a3038; --accent: #5aa6f0;
+  --stage: radial-gradient(120% 90% at 50% 20%, #2b3138 0%, #171b20 70%, #0f1215 100%);
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f1215; --surface: #171b20; --ink: #e8ecef; --muted: #96a0aa; --line: #2a3038; --accent: #5aa6f0;
+  --stage: radial-gradient(120% 90% at 50% 20%, #2b3138 0%, #171b20 70%, #0f1215 100%);
+  color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px }
+.wrap { max-width: 1280px; margin: 0 auto; display: grid; gap: 20px }
+header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px }
+h1 { font-family: var(--display); font-stretch: 112%; font-weight: 800; font-size: clamp(26px, 4vw, 40px); letter-spacing: -0.01em; margin: 0; line-height: 1.05; text-wrap: balance }
+.sub { color: var(--muted); margin: 4px 0 0; max-width: 62ch }
+.chips { display: flex; flex-wrap: wrap; gap: 6px }
+.chip { font: 500 13px var(--body); border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 6px 12px; border-radius: 999px; cursor: pointer }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink) }
+.chip:focus-visible, .item:focus-visible, .sw:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+
+.main { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 20px; align-items: start }
+@media (max-width: 860px) { .main { grid-template-columns: minmax(0, 1fr) } .rail { max-height: 260px } }
+
+.rail { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: auto; max-height: 640px }
+.brand { font: 600 11px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 14px 16px 6px; position: sticky; top: 0; background: var(--surface) }
+.item { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; width: 100%; text-align: left; border: 0; border-top: 1px solid var(--line); background: none; color: var(--ink); padding: 10px 16px; cursor: pointer; font: inherit }
+.item:hover { background: color-mix(in srgb, var(--accent) 7%, transparent) }
+.item[aria-current="true"] { background: color-mix(in srgb, var(--accent) 14%, transparent) }
+.item b { font-family: var(--display); font-stretch: 105%; font-weight: 700; font-size: 16px }
+.item small { color: var(--muted); font-size: 12px; grid-column: 1 }
+.item .len { font: 400 12px var(--mono); color: var(--muted); grid-row: 1 / span 2; grid-column: 2; align-self: center; font-variant-numeric: tabular-nums }
+
+.stagecol { display: grid; gap: 12px; min-width: 0 }
+.stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; aspect-ratio: 16 / 9; max-width: 100%; min-height: 300px }
+.stage canvas { display: block; width: 100% !important; height: 100% !important; touch-action: none }
+.overlay { position: absolute; left: 16px; top: 14px; pointer-events: none }
+.overlay .mk { font: 600 11px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted) }
+.overlay .md { font-family: var(--display); font-stretch: 118%; font-weight: 800; font-size: clamp(22px, 3.4vw, 36px); line-height: 1; margin-top: 4px }
+.hint { position: absolute; right: 14px; bottom: 12px; font: 400 12px var(--mono); color: var(--muted); pointer-events: none }
+.drop[hidden] { display: none }
+.drop { position: absolute; inset: 0; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 18%, transparent); border: 2px dashed var(--accent); border-radius: 10px; font: 600 16px var(--body); color: var(--ink) }
+
+.plate { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: var(--surface); border: 1px solid var(--line); border-radius: 10px }
+.plate > div { padding: 12px 16px; border-left: 1px solid var(--line); min-width: 0 }
+.plate > div:first-child { border-left: 0 }
+.plate dt { font: 600 11px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted) }
+.plate dd { margin: 2px 0 0; font-weight: 600; font-variant-numeric: tabular-nums }
+@media (max-width: 600px) { .plate { grid-template-columns: repeat(2, minmax(0, 1fr)) } .plate > div:nth-child(3) { border-left: 0 } .plate > div:nth-child(n+3) { border-top: 1px solid var(--line) } }
+
+.tools { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between }
+.swatches { display: flex; gap: 8px; align-items: center }
+.swatches span { font: 600 11px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-right: 4px }
+.sw { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--line); cursor: pointer; padding: 0 }
+.sw[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--accent) }
+.btn { font: 500 13px var(--body); border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 8px 14px; border-radius: 8px; cursor: pointer }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff }
+
+.note { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; display: grid; gap: 6px }
+.note h2 { font-family: var(--display); font-stretch: 108%; font-size: 17px; margin: 0 }
+.note p { margin: 0; color: var(--muted); max-width: 72ch }
+.note code { font-family: var(--mono); font-size: 13px; color: var(--ink) }
+.sf { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px }
+.sf input { flex: 1 1 260px; min-width: 0; font: 400 14px var(--mono); padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink) }
+.sf a { align-self: center; color: var(--accent); font-weight: 500 }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Bilbibliotek 3D</h1>
+      <p class="sub">Prototype for en Power Platform Code App: velg en modell, drei den med musa, og bytt lakk. Modellene her er forenklede plassholdere bygget i three.js. Slipp en ekte <code>.glb</code> fra Sketchfab på scenen for å se den i samme viewer.</p>
+    </div>
+    <div class="chips" id="chips" role="toolbar" aria-label="Filtrer merke"></div>
+  </header>
+
+  <div class="main">
+    <nav class="rail" id="rail" aria-label="Modeller"></nav>
+    <div class="stagecol">
+      <div class="stage" id="stage">
+        <div class="overlay"><div class="mk" id="ovBrand"></div><div class="md" id="ovModel"></div></div>
+        <div class="hint">dra for å rotere · scroll for zoom</div>
+        <div class="drop" id="drop" hidden>Slipp .glb-filen for å laste den inn</div>
+      </div>
+      <dl class="plate" id="plate"></dl>
+      <div class="tools">
+        <div class="swatches" id="swatches"><span>Lakk</span></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn" id="spin" type="button" aria-pressed="true">Stopp rotasjon</button>
+          <label class="btn primary" for="file">Last inn .glb</label>
+          <input id="file" type="file" accept=".glb" hidden>
+        </div>
+      </div>
+      <div class="note">
+        <h2>Koble til Sketchfab</h2>
+        <p>Inne i en artifact kan ikke Sketchfab bygges inn som iframe, så her lastes modeller som filer. I Code Appen kan du enten bruke Sketchfab Viewer API (iframe) eller laste ned modellen som GLB og vise den i denne three.js-vieweren. Lim inn en modell-URL for å åpne den på Sketchfab.</p>
+        <div class="sf">
+          <input id="sfurl" type="url" placeholder="https://sketchfab.com/3d-models/…" aria-label="Sketchfab-URL">
+          <a id="sflink" href="https://sketchfab.com/search?q=volkswagen&type=models&features=downloadable" target="_blank" rel="noopener">Søk nedlastbare VW-modeller ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/environments/RoomEnvironment.js"></script>
+<script>
+// Eksempeldata. Lengder er omtrentlige og kun for demo.
+const MODELS = [
+  { brand: "Volkswagen", model: "Golf", body: "hatch", len: 4284, drive: "Bensin / PHEV", seg: "Kompakt" },
+  { brand: "Volkswagen", model: "ID.4", body: "suv", len: 4584, drive: "Elbil", seg: "SUV" },
+  { brand: "Volkswagen", model: "ID.7 Tourer", body: "wagon", len: 4961, drive: "Elbil", seg: "Stasjonsvogn" },
+  { brand: "Volkswagen", model: "Tiguan", body: "suv", len: 4539, drive: "Bensin / PHEV", seg: "SUV" },
+  { brand: "Audi", model: "Q4 e-tron", body: "suv", len: 4588, drive: "Elbil", seg: "SUV" },
+  { brand: "Audi", model: "Q6 e-tron", body: "suv", len: 4771, drive: "Elbil", seg: "SUV" },
+  { brand: "Audi", model: "A6 Avant e-tron", body: "wagon", len: 4928, drive: "Elbil", seg: "Stasjonsvogn" },
+  { brand: "Skoda", model: "Elroq", body: "suv", len: 4488, drive: "Elbil", seg: "SUV" },
+  { brand: "Skoda", model: "Enyaq", body: "suv", len: 4658, drive: "Elbil", seg: "SUV" },
+  { brand: "Skoda", model: "Octavia Combi", body: "wagon", len: 4698, drive: "Bensin / Diesel", seg: "Stasjonsvogn" },
+  { brand: "Cupra", model: "Born", body: "hatch", len: 4322, drive: "Elbil", seg: "Kompakt" },
+  { brand: "Cupra", model: "Formentor", body: "coupe", len: 4450, drive: "Bensin / PHEV", seg: "Crossover" },
+  { brand: "Cupra", model: "Tavascan", body: "coupe", len: 4644, drive: "Elbil", seg: "Crossover" },
+];
+const PAINTS = [
+  { name: "Månesteinsgrå", hex: "#8a9096" }, { name: "Dyp sort", hex: "#16181b" },
+  { name: "Glacier hvit", hex: "#e9ebec" }, { name: "Kingsred", hex: "#9e1b22" },
+  { name: "Aurora blå", hex: "#1f4f8a" }, { name: "Kobber", hex: "#a5683f" },
+];
+const BRAND_PAINT = { Volkswagen: 4, Audi: 0, Skoda: 2, Cupra: 5 };
+const BODY_LABEL = { hatch: "Kombikupé", suv: "SUV", wagon: "Stasjonsvogn", coupe: "Coupé-SUV" };
+
+// Side profiles in metres for a reference length (L). belt = beltline, ws = windshield base x, cabin = glass outline x.
+const PROFILES = {
+  hatch: { L: 4.28, W: 1.79, H: 1.46, belt: 0.98, beltR: 1.0, hood: 0.9, ws: 2.95, cR: 0.08, rR: 0.38, rF: 2.25 },
+  suv:   { L: 4.6,  W: 1.85, H: 1.64, belt: 1.08, beltR: 1.1, hood: 1.02, ws: 3.3, cR: 0.1, rR: 0.42, rF: 2.6 },
+  wagon: { L: 4.7,  W: 1.85, H: 1.48, belt: 0.95, beltR: 0.97, hood: 0.86, ws: 3.45, cR: 0.06, rR: 0.3, rF: 2.7 },
+  coupe: { L: 4.5,  W: 1.84, H: 1.53, belt: 1.0, beltR: 1.0, hood: 0.95, ws: 3.25, cR: 0.15, rR: 1.05, rF: 2.5 },
+};
+
+const stage = document.getElementById("stage");
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+stage.prepend(renderer.domElement);
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new THREE.RoomEnvironment(), 0.04).texture;
+
+const camera = new THREE.PerspectiveCamera(35, 16 / 9, 0.1, 100);
+camera.position.set(6.2, 2.4, 6.4);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 0.6, 0);
+controls.enableDamping = true;
+controls.minDistance = 4; controls.maxDistance = 16;
+controls.maxPolarAngle = Math.PI * 0.49;
+controls.autoRotate = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+controls.autoRotateSpeed = 1.2;
+
+const sun = new THREE.DirectionalLight(0xffffff, 1.6);
+sun.position.set(4, 8, 3);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -4, right: 4, top: 4, bottom: -4 });
+scene.add(sun, new THREE.HemisphereLight(0xffffff, 0x444444, 0.4));
+const ground = new THREE.Mesh(new THREE.CircleGeometry(6, 64), new THREE.ShadowMaterial({ opacity: 0.28 }));
+ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true;
+scene.add(ground);
+
+const paintMat = new THREE.MeshPhysicalMaterial({ color: PAINTS[0].hex, metalness: 0.6, roughness: 0.32, clearcoat: 1, clearcoatRoughness: 0.08 });
+const glassMat = new THREE.MeshPhysicalMaterial({ color: 0x0b0e12, metalness: 0.2, roughness: 0.05, transparent: true, opacity: 0.88 });
+const trimMat = new THREE.MeshStandardMaterial({ color: 0x111316, roughness: 0.6 });
+const tireMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.9 });
+const rimMat = new THREE.MeshStandardMaterial({ color: 0xb8bcc0, metalness: 1, roughness: 0.25 });
+const lampF = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xe8f2ff, emissiveIntensity: 1.2 });
+const lampR = new THREE.MeshStandardMaterial({ color: 0x550000, emissive: 0xff1a1a, emissiveIntensity: 1.1 });
+
+function extrude(pts, depth, mat, bevel = 0.04) {
+  const s = new THREE.Shape(pts.map(([x, y]) => new THREE.Vector2(x, y)));
+  const g = new THREE.ExtrudeGeometry(s, { depth, bevelEnabled: true, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 4, curveSegments: 8 });
+  g.translate(0, 0, -depth / 2);
+  const m = new THREE.Mesh(g, mat); m.castShadow = true; return m;
+}
+
+function buildCar(entry) {
+  const p = PROFILES[entry.body];
+  const k = entry.len / 1000 / p.L;                // stretch the reference profile to the model's length
+  const L = p.L * k, W = p.W - 0.1, x = v => v * k;
+  const car = new THREE.Group();
+  // lower body to the beltline
+  car.add(extrude([[0.06, 0.26], [0, 0.55], [0.04, p.beltR], [x(p.ws), p.belt], [L - 0.12, p.hood], [L, p.hood - 0.22], [L, 0.36], [L - 0.1, 0.26]], W, paintMat));
+  // glass cabin, slightly narrower
+  car.add(extrude([[x(p.cR), p.beltR - 0.02], [x(p.rR), p.H - 0.05], [x(p.rF), p.H - 0.05], [x(p.ws), p.belt - 0.02]], W * 0.84, glassMat, 0.03));
+  // roof cap and B-pillar in body colour
+  car.add(extrude([[x(p.rR) + 0.02, p.H - 0.07], [x(p.rR) + 0.06, p.H], [x(p.rF) - 0.04, p.H], [x(p.rF), p.H - 0.07]], W * 0.86, paintMat, 0.03));
+  const bx = (x(p.rR) + x(p.rF)) / 2 + 0.15, bp = new THREE.Mesh(new THREE.BoxGeometry(0.1, p.H - p.belt, W * 0.88), trimMat);
+  bp.position.set(bx, (p.H + p.belt) / 2, 0); car.add(bp);
+  // sills and lamps
+  const sill = new THREE.Mesh(new THREE.BoxGeometry(L - 1.9, 0.1, W + 0.1), trimMat); sill.position.set(L / 2, 0.3, 0); car.add(sill);
+  const hl = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.07, W * 0.9), lampF); hl.position.set(L + 0.02, p.hood - 0.12, 0); car.add(hl);
+  const tl = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.06, W * 0.92), lampR); tl.position.set(0.0, p.beltR - 0.12, 0); car.add(tl);
+  // wheels
+  const r = entry.body === "suv" || entry.body === "coupe" ? 0.37 : 0.33;
+  const tireG = new THREE.CylinderGeometry(r, r, 0.24, 40), rimG = new THREE.CylinderGeometry(r * 0.66, r * 0.66, 0.25, 10);
+  for (const wx of [0.82 * k, L - 0.88 * k]) for (const s of [-1, 1]) {
+    const w = new THREE.Group();
+    const t = new THREE.Mesh(tireG, tireMat), rim = new THREE.Mesh(rimG, rimMat);
+    t.castShadow = true; w.add(t, rim);
+    w.rotation.x = Math.PI / 2; w.position.set(wx, r, s * (W / 2 + 0.02));
+    car.add(w);
+  }
+  car.position.x = -L / 2;
+  const holder = new THREE.Group(); holder.add(car); return holder;
+}
+
+let current = null, state = { brand: "Alle", idx: 1, paint: BRAND_PAINT.Volkswagen };
+function show(obj) {
+  if (current) { scene.remove(current); current.traverse(o => o.geometry && o.geometry.dispose()); }
+  current = obj; scene.add(obj);
+}
+
+function fitImported(root) {
+  const box = new THREE.Box3().setFromObject(root), size = box.getSize(new THREE.Vector3());
+  const s = 4.5 / Math.max(size.x, size.z || 1);
+  root.scale.setScalar(s);
+  const b2 = new THREE.Box3().setFromObject(root), c = b2.getCenter(new THREE.Vector3());
+  root.position.sub(new THREE.Vector3(c.x, b2.min.y, c.z));
+  root.traverse(o => { if (o.isMesh) { o.castShadow = true; } });
+  const g = new THREE.Group(); g.add(root); return g;
+}
+
+// UI
+const $ = id => document.getElementById(id);
+const brands = ["Alle", ...new Set(MODELS.map(m => m.brand))];
+function renderChips() {
+  $("chips").innerHTML = brands.map(b => `<button class="chip" type="button" aria-pressed="${b === state.brand}">${b}</button>`).join("");
+  [...$("chips").children].forEach((el, i) => el.onclick = () => { state.brand = brands[i]; renderChips(); renderRail(); });
+}
+function renderRail() {
+  const groups = brands.slice(1).filter(b => state.brand === "Alle" || b === state.brand);
+  $("rail").innerHTML = groups.map(b => `<div class="brand">${b}</div>` + MODELS.map((m, i) => m.brand !== b ? "" :
+    `<button class="item" type="button" data-i="${i}" aria-current="${i === state.idx}"><b>${m.model}</b><small>${BODY_LABEL[m.body]} · ${m.drive}</small><span class="len">${m.len.toLocaleString("nb-NO")} mm</span></button>`).join("")).join("");
+  $("rail").querySelectorAll(".item").forEach(el => el.onclick = () => select(+el.dataset.i));
+}
+function renderPlate(m) {
+  const rows = m ? [["Karosseri", BODY_LABEL[m.body]], ["Drivlinje", m.drive], ["Lengde ca.", m.len.toLocaleString("nb-NO") + " mm"], ["Lakk", PAINTS[state.paint].name]]
+    : [["Kilde", "Egen .glb-fil"], ["Format", "glTF binær"], ["Skalert til", "4,5 m"], ["Lakk", "Fra filen"]];
+  $("plate").innerHTML = rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("");
+}
+function renderSwatches() {
+  $("swatches").innerHTML = "<span>Lakk</span>" + PAINTS.map((p, i) => `<button class="sw" type="button" style="background:${p.hex}" aria-label="${p.name}" title="${p.name}" aria-pressed="${i === state.paint}"></button>`).join("");
+  $("swatches").querySelectorAll(".sw").forEach((el, i) => el.onclick = () => { state.paint = i; paintMat.color.set(PAINTS[i].hex); renderSwatches(); if (state.idx >= 0) renderPlate(MODELS[state.idx]); });
+}
+function select(i) {
+  const m = MODELS[i];
+  state.idx = i; state.paint = BRAND_PAINT[m.brand]; paintMat.color.set(PAINTS[state.paint].hex);
+  show(buildCar(m));
+  $("ovBrand").textContent = m.brand; $("ovModel").textContent = m.model;
+  renderRail(); renderPlate(m); renderSwatches();
+  $("swatches").hidden = false;
+}
+
+function loadGLB(file) {
+  const reader = new FileReader();
+  reader.onload = () => new THREE.GLTFLoader().parse(reader.result, "", gltf => {
+    state.idx = -1; show(fitImported(gltf.scene));
+    $("ovBrand").textContent = "Importert"; $("ovModel").textContent = file.name.replace(/\.glb$/i, "");
+    renderRail(); renderPlate(null); $("swatches").hidden = true;
+  }, err => { $("ovBrand").textContent = "Kunne ikke lese filen"; $("ovModel").textContent = "Bruk en .glb uten Draco-komprimering"; console.error(err); });
+  reader.readAsArrayBuffer(file);
+}
+$("file").onchange = e => e.target.files[0] && loadGLB(e.target.files[0]);
+stage.addEventListener("dragover", e => { e.preventDefault(); $("drop").hidden = false; });
+stage.addEventListener("dragleave", e => { if (!stage.contains(e.relatedTarget)) $("drop").hidden = true; });
+stage.addEventListener("drop", e => { e.preventDefault(); $("drop").hidden = true; const f = e.dataTransfer.files[0]; if (f) loadGLB(f); });
+$("spin").onclick = () => { controls.autoRotate = !controls.autoRotate; $("spin").textContent = controls.autoRotate ? "Stopp rotasjon" : "Start rotasjon"; $("spin").setAttribute("aria-pressed", controls.autoRotate); };
+$("spin").textContent = controls.autoRotate ? "Stopp rotasjon" : "Start rotasjon";
+$("sfurl").addEventListener("input", e => {
+  const v = e.target.value.trim();
+  if (/^https:\/\/(www\.)?sketchfab\.com\//.test(v)) { $("sflink").href = v; $("sflink").textContent = "Åpne på Sketchfab ↗"; }
+});
+
+function resize() {
+  const { clientWidth: w, clientHeight: h } = stage;
+  renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(stage);
+renderChips(); select(state.idx); resize();
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+</script>
