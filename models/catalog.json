@@ -178,5 +178,95 @@
       "faces": 1765744
     },
     "commercialUse": false
+  },
+  {
+    "id": "porsche-taycan",
+    "brand": "Porsche",
+    "model": "Taycan",
+    "body": "sedan",
+    "file": "porsche-taycan.glb",
+    "sketchfab": {
+      "uid": "4e1abafe7cf5413587a421377624ba08",
+      "title": "2025 Porsche Taycan Turbo GT Weissach Package",
+      "url": "https://sketchfab.com/3d-models/2025-porsche-taycan-turbo-gt-weissach-package-4e1abafe7cf5413587a421377624ba08",
+      "author": "Ddiaz Design",
+      "authorUrl": "https://sketchfab.com/ddiaz-design",
+      "license": "CC Attribution-NonCommercial-ShareAlike",
+      "licenseUrl": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "faces": 281228
+    },
+    "commercialUse": false
+  },
+  {
+    "id": "porsche-macan",
+    "brand": "Porsche",
+    "model": "Macan",
+    "body": "suv",
+    "file": "porsche-macan.glb",
+    "sketchfab": {
+      "uid": "fb282e1ac22041f892630a3f28f387f5",
+      "title": "2022 Porsche Macan GTS",
+      "url": "https://sketchfab.com/3d-models/2022-porsche-macan-gts-fb282e1ac22041f892630a3f28f387f5",
+      "author": "Ddiaz Design",
+      "authorUrl": "https://sketchfab.com/ddiaz-design",
+      "license": "CC Attribution-NonCommercial-ShareAlike",
+      "licenseUrl": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "faces": 373640
+    },
+    "commercialUse": false
+  },
+  {
+    "id": "porsche-cayenne",
+    "brand": "Porsche",
+    "model": "Cayenne",
+    "body": "suv",
+    "file": "porsche-cayenne.glb",
+    "sketchfab": {
+      "uid": "74fbea5a4dfc4197839fdd2bf654369a",
+      "title": "2022 Porsche Cayenne Turbo GT",
+      "url": "https://sketchfab.com/3d-models/2022-porsche-cayenne-turbo-gt-74fbea5a4dfc4197839fdd2bf654369a",
+      "author": "Ddiaz Design",
+      "authorUrl": "https://sketchfab.com/ddiaz-design",
+      "license": "CC Attribution-NonCommercial-ShareAlike",
+      "licenseUrl": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "faces": 250917
+    },
+    "commercialUse": false
+  },
+  {
+    "id": "porsche-911",
+    "brand": "Porsche",
+    "model": "911",
+    "body": "coupe",
+    "file": "porsche-911.glb",
+    "sketchfab": {
+      "uid": "a76364a3d50c4d78912a28250cb57be5",
+      "title": "2022 Porsche 911 GT3 Touring (992)",
+      "url": "https://sketchfab.com/3d-models/2022-porsche-911-gt3-touring-992-a76364a3d50c4d78912a28250cb57be5",
+      "author": "Ddiaz Design",
+      "authorUrl": "https://sketchfab.com/ddiaz-design",
+      "license": "CC Attribution-NonCommercial-ShareAlike",
+      "licenseUrl": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "faces": 238024
+    },
+    "commercialUse": false
+  },
+  {
+    "id": "porsche-panamera",
+    "brand": "Porsche",
+    "model": "Panamera",
+    "body": "wagon",
+    "file": "porsche-panamera.glb",
+    "sketchfab": {
+      "uid": "f2269fdf74f64257a3a9b0872eb9b2d8",
+      "title": "2021 Porsche Panamera Turbo S Sport Turismo",
+      "url": "https://sketchfab.com/3d-models/2021-porsche-panamera-turbo-s-sport-turismo-f2269fdf74f64257a3a9b0872eb9b2d8",
+      "author": "Ddiaz Design",
+      "authorUrl": "https://sketchfab.com/ddiaz-design",
+      "license": "CC Attribution-NonCommercial-ShareAlike",
+      "licenseUrl": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "faces": 241824
+    },
+    "commercialUse": false
   }
 ]
