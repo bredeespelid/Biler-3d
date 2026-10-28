@@ -57,8 +57,12 @@ for (const car of todo) {
       source = findGltf(join(work, "src"));
     }
     // quantize krever ingen dekoder i three.js; webp og 2048px holder filene små nok for git.
-    gltfTransform("optimize", source, join(MODELS_DIR, car.file),
+    const optimized = join(work, "optimized.glb"), welded = join(work, "welded.glb");
+    gltfTransform("optimize", source, optimized,
       "--compress", "quantize", "--texture-compress", "webp", "--texture-size", "2048");
+    // Etter kvantisering blir mange nesten like punkter helt like; sveis dem og forenkle forsiktig.
+    gltfTransform("weld", optimized, welded);
+    gltfTransform("simplify", welded, join(MODELS_DIR, car.file), "--ratio", "0.5", "--error", "0.002");
     const mb = statSync(join(MODELS_DIR, car.file)).size / 1e6;
     console.log(`  lagret ${car.file} (${mb.toFixed(1)} MB)`);
   } finally {

@@ -51,7 +51,11 @@
       "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
       "faces": 263739
     },
-    "commercialUse": true
+    "commercialUse": true,
+    "fix": {
+      "paint": "#1c242c",
+      "recomputeNormals": true
+    }
   },
   {
     "id": "vw-tiguan",
@@ -141,7 +145,10 @@
       "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
       "faces": 1361798
     },
-    "commercialUse": true
+    "commercialUse": true,
+    "fix": {
+      "forceOpaque": true
+    }
   },
   {
     "id": "skoda-elroq",
@@ -150,16 +157,20 @@
     "body": "suv",
     "file": "skoda-elroq.glb",
     "sketchfab": {
-      "uid": "3f811328cb474a09bd639251180618fb",
-      "title": "Skoda_elroq_body_s24_20240927",
-      "url": "https://sketchfab.com/3d-models/skoda-elroq-body-s24-20240927-3f811328cb474a09bd639251180618fb",
-      "author": "alekspopov875",
-      "authorUrl": "https://sketchfab.com/alekspopov875",
-      "license": "CC Attribution",
-      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
-      "faces": 224762
+      "uid": "94a583ba82254d368aeae3192ee5d606",
+      "title": "skoda elroq L a K",
+      "url": "https://sketchfab.com/3d-models/skoda-elroq-l-a-k-94a583ba82254d368aeae3192ee5d606",
+      "author": "LaPi022",
+      "authorUrl": "https://sketchfab.com/LaPi022",
+      "license": "Free Standard",
+      "licenseUrl": "https://sketchfab.com/licenses",
+      "faces": 39998
     },
-    "commercialUse": true
+    "commercialUse": true,
+    "fix": {
+      "paint": "#24361d",
+      "recomputeNormals": true
+    }
   },
   {
     "id": "skoda-enyaq",
@@ -168,16 +179,20 @@
     "body": "suv",
     "file": "skoda-enyaq.glb",
     "sketchfab": {
-      "uid": "14ba0655029a48219b41030fd259104e",
-      "title": "Skoda Enyaq",
-      "url": "https://sketchfab.com/3d-models/skoda-enyaq-14ba0655029a48219b41030fd259104e",
-      "author": "Nieve5677",
-      "authorUrl": "https://sketchfab.com/niev",
+      "uid": "426bc40471414849a0473168dcb7d32a",
+      "title": "2022 Skoda Enyaq iV",
+      "url": "https://sketchfab.com/3d-models/2022-skoda-enyaq-iv-426bc40471414849a0473168dcb7d32a",
+      "author": "tonielpro520",
+      "authorUrl": "https://sketchfab.com/tonielpro520",
       "license": "CC Attribution",
       "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
-      "faces": 353424
+      "faces": 351063
     },
-    "commercialUse": true
+    "commercialUse": true,
+    "fix": {
+      "paint": "#0f2a22",
+      "recomputeNormals": true
+    }
   },
   {
     "id": "skoda-octavia-combi",
@@ -204,14 +219,14 @@
     "body": "crossover",
     "file": "cupra-formentor.glb",
     "sketchfab": {
-      "uid": "3674038309c84faa86c3be4642db2c27",
-      "title": "Cupra Formentor 2021",
-      "url": "https://sketchfab.com/3d-models/cupra-formentor-2021-3674038309c84faa86c3be4642db2c27",
-      "author": "Sloftm_Carz",
-      "authorUrl": "https://sketchfab.com/SLBofficial",
-      "license": "CC Attribution",
-      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
-      "faces": 1644165
+      "uid": "c3c7c51cf51a4d0ba9701c729721558d",
+      "title": "Cupra Formentor",
+      "url": "https://sketchfab.com/3d-models/cupra-formentor-c3c7c51cf51a4d0ba9701c729721558d",
+      "author": "Gerda",
+      "authorUrl": "https://sketchfab.com/koelkastasbers",
+      "license": "Free Standard",
+      "licenseUrl": "https://sketchfab.com/licenses",
+      "faces": 530370
     },
     "commercialUse": true
   },

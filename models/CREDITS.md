@@ -1,6 +1,6 @@
 # Kreditering av 3D-modeller
 
-Alle modellene er lastet ned fra Sketchfab. Lisensene krever at forfatteren krediteres der modellen vises.
+Alle modellene er lastet ned fra Sketchfab og brukes til intern testing. Lisensene krever at forfatteren krediteres der modellen vises.
 
 | Modell | Sketchfab-tittel | Forfatter | Lisens | Kommersiell bruk |
 |---|---|---|---|---|
@@ -12,10 +12,10 @@ Alle modellene er lastet ned fra Sketchfab. Lisensene krever at forfatteren kred
 | Audi Q4 e-tron | [2022 Audi Q4 e-tron](https://sketchfab.com/3d-models/2022-audi-q4-e-tron-5d34f3e7141d4562b4f0c257ff54326b) | [tonielpro520](https://sketchfab.com/tonielpro520) | [CC Attribution](http://creativecommons.org/licenses/by/4.0/) | Ja |
 | Audi Q6 | [Audi Q6](https://sketchfab.com/3d-models/audi-q6-2667c451516e45a196c0ff75f240e4d7) | [xray collection](https://sketchfab.com/xray_collection) | [CC Attribution](http://creativecommons.org/licenses/by/4.0/) | Ja |
 | Audi A6 Avant | [Audi A6 Avant](https://sketchfab.com/3d-models/audi-a6-avant-0c543362fef5438bbbf7b3d9c1743e73) | [Nieve5677](https://sketchfab.com/niev) | [CC Attribution](http://creativecommons.org/licenses/by/4.0/) | Ja |
-| Skoda Elroq | [Skoda_elroq_body_s24_20240927](https://sketchfab.com/3d-models/skoda-elroq-body-s24-20240927-3f811328cb474a09bd639251180618fb) | [alekspopov875](https://sketchfab.com/alekspopov875) | [CC Attribution](http://creativecommons.org/licenses/by/4.0/) | Ja |
-| Skoda Enyaq | [Skoda Enyaq](https://sketchfab.com/3d-models/skoda-enyaq-14ba0655029a48219b41030fd259104e) | [Nieve5677](https://sketchfab.com/niev) | [CC Attribution](http://creativecommons.org/licenses/by/4.0/) | Ja |
+| Skoda Elroq | [skoda elroq L a K](https://sketchfab.com/3d-models/skoda-elroq-l-a-k-94a583ba82254d368aeae3192ee5d606) | [LaPi022](https://sketchfab.com/LaPi022) | [Free Standard](https://sketchfab.com/licenses) | Ja |
+| Skoda Enyaq | [2022 Skoda Enyaq iV](https://sketchfab.com/3d-models/2022-skoda-enyaq-iv-426bc40471414849a0473168dcb7d32a) | [tonielpro520](https://sketchfab.com/tonielpro520) | [CC Attribution](http://creativecommons.org/licenses/by/4.0/) | Ja |
 | Skoda Octavia RS Combi | [2025 Skoda Octavia RS Combi](https://sketchfab.com/3d-models/2025-skoda-octavia-rs-combi-e584bb09fa6547a0a3ca7c1ec7c2053a) | [tonielpro520](https://sketchfab.com/tonielpro520) | [CC Attribution](http://creativecommons.org/licenses/by/4.0/) | Ja |
-| Cupra Formentor | [Cupra Formentor 2021](https://sketchfab.com/3d-models/cupra-formentor-2021-3674038309c84faa86c3be4642db2c27) | [Sloftm_Carz](https://sketchfab.com/SLBofficial) | [CC Attribution](http://creativecommons.org/licenses/by/4.0/) | Ja |
+| Cupra Formentor | [Cupra Formentor](https://sketchfab.com/3d-models/cupra-formentor-c3c7c51cf51a4d0ba9701c729721558d) | [Gerda](https://sketchfab.com/koelkastasbers) | [Free Standard](https://sketchfab.com/licenses) | Ja |
 | Cupra Born | [2022-2024 Cupra Born](https://sketchfab.com/3d-models/2022-2024-cupra-born-c41e05dde4244592898e62fae766e8a8) | [BloxBloger](https://sketchfab.com/BloxBloger) | [CC Attribution-NonCommercial](http://creativecommons.org/licenses/by-nc/4.0/) | **Nei** |
 | Cupra Tavascan | [2025 Cupra Tavascan](https://sketchfab.com/3d-models/2025-cupra-tavascan-d984b390589c43e691ce6459dcc140cd) | [BloxBloger](https://sketchfab.com/BloxBloger) | [CC Attribution-NonCommercial](http://creativecommons.org/licenses/by-nc/4.0/) | **Nei** |
 

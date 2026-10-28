@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Bilbibliotek 3D</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -61,7 +62,7 @@ h1 { font-family: var(--display); font-stretch: 112%; font-weight: 800; font-siz
 .loading { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: grid; gap: 8px; justify-items: center; font: 500 13px var(--mono); color: var(--muted) }
 .bar { width: 180px; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden }
 .bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.15s }
-.drop[hidden] { display: none }
+.drop[hidden], .loading[hidden] { display: none }
 .drop { position: absolute; inset: 0; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 18%, transparent); border: 2px dashed var(--accent); border-radius: 10px; font: 600 16px var(--body); color: var(--ink) }
 
 .plate { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin: 0 }
@@ -122,6 +123,7 @@ const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.9;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 stage.prepend(renderer.domElement);
@@ -149,6 +151,21 @@ scene.add(sun, new THREE.HemisphereLight(0xffffff, 0x444444, 0.35));
 const ground = new THREE.Mesh(new THREE.CircleGeometry(7, 64), new THREE.ShadowMaterial({ opacity: 0.28 }));
 ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true;
 scene.add(ground);
+
+// Per-model corrections from catalog.json: wrong up-axis, untextured clay models, materials exported as BLEND.
+function applyFix(root, fix = {}) {
+  if (fix.rotate) root.rotation.set(...fix.rotate.map(THREE.MathUtils.degToRad));
+  root.traverse(o => {
+    if (!o.isMesh) return;
+    if (fix.recomputeNormals) { o.geometry.deleteAttribute("normal"); o.geometry.computeVertexNormals(); }
+    if (fix.paint) o.material = new THREE.MeshPhysicalMaterial({ color: fix.paint, metalness: 0.5, roughness: 0.4, clearcoat: 1, clearcoatRoughness: 0.1 });
+    for (const m of [].concat(o.material)) {
+      if (fix.forceOpaque) Object.assign(m, { transmission: 0, transparent: false, depthWrite: true });
+      m.needsUpdate = true;
+    }
+  });
+  root.updateMatrixWorld(true);
+}
 
 // Normalise any Sketchfab export: longest horizontal side becomes 4.6 m, wheels on the ground, centred.
 function fit(root) {
@@ -181,11 +198,14 @@ function select(id) {
   const my = ++token;
   if (cache.has(id)) { show(cache.get(id)); return; }
   show(null); loading(true, 0, "Laster modell");
+  let done = false;
   loader.load("models/" + car.file, gltf => {
+    done = true;
+    applyFix(gltf.scene, car.fix);
     const obj = fit(gltf.scene); cache.set(id, obj);
     if (my === token) { show(obj); loading(false); }
   }, e => {
-    if (my === token && e.total) loading(true, Math.round(e.loaded / e.total * 100), `Laster modell · ${(e.loaded / 1e6).toFixed(1)} av ${(e.total / 1e6).toFixed(1)} MB`);
+    if (!done && my === token && e.total) loading(true, Math.round(e.loaded / e.total * 100), `Laster modell · ${(e.loaded / 1e6).toFixed(1)} av ${(e.total / 1e6).toFixed(1)} MB`);
   }, err => {
     console.error(err);
     if (my === token) loading(true, 0, "Fant ikke modellfilen. Kjør scripts/fetch-models.mjs.");
