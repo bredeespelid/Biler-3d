@@ -5,6 +5,7 @@ Alle modellene er lastet ned fra Sketchfab og brukes til intern testing. Lisense
 | Modell | Sketchfab-tittel | Forfatter | Lisens | Kommersiell bruk |
 |---|---|---|---|---|
 | Volkswagen Golf | [Volkswagen Golf 8. GTI (A8)](https://sketchfab.com/3d-models/volkswagen-golf-8-gti-a8-e87d7c0f8937481db236529beb5ecab7) | [Mona x Supercars](https://sketchfab.com/Car2022) | [CC Attribution](http://creativecommons.org/licenses/by/4.0/) | Ja |
+| Volkswagen ID.3 | [Volkswagen ID.3 Pro (2024)](https://sketchfab.com/3d-models/volkswagen-id3-pro-2024-869fe1b400104f45b9a51df73222b7c4) | [geyges](https://sketchfab.com/geyges) | [Free Standard](https://sketchfab.com/licenses) | Ja |
 | Volkswagen ID.4 | [Volkswagen ID.4 Pro (2025)](https://sketchfab.com/3d-models/volkswagen-id4-pro-2025-20d27c97c31043e8a3d1baa279597253) | [geyges](https://sketchfab.com/geyges) | [Free Standard](https://sketchfab.com/licenses) | Ja |
 | Volkswagen ID.7 | [Volkswagen ID.7 2024](https://sketchfab.com/3d-models/volkswagen-id7-2024-a1356d1767e94341845367e78260537a) | [Nieve5677](https://sketchfab.com/niev) | [CC Attribution](http://creativecommons.org/licenses/by/4.0/) | Ja |
 | Volkswagen Tiguan | [Volkswagen Tiguan (2025)](https://sketchfab.com/3d-models/volkswagen-tiguan-2025-18333bf2a9564772917ae8a349b81e62) | [geyges](https://sketchfab.com/geyges) | [Free Standard](https://sketchfab.com/licenses) | Ja |
