@@ -1,0 +1,17 @@
+{
+  "name": "biler-3d",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "cars": "node scripts/build-car-modules.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "three": "0.179.1"
+  },
+  "devDependencies": {
+    "@types/three": "0.179.0",
+    "esbuild": "0.25.12",
+    "typescript": "5.9.3"
+  }
+}
