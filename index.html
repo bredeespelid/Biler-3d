@@ -1,0 +1,247 @@
+<title>Bilbibliotek 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: showroom — model rail on the left, a turntable stage on the right, spec plate pinned under the stage */
+:root {
+  --bg: #eef0f2;
+  --surface: #ffffff;
+  --ink: #15191e;
+  --muted: #5d6670;
+  --line: #d5dadf;
+  --accent: #0b5cad;
+  --warn: #9a5b00;
+  --stage: radial-gradient(120% 90% at 50% 20%, #ffffff 0%, #dfe3e7 70%, #cfd4d9 100%);
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1215; --surface: #171b20; --ink: #e8ecef; --muted: #96a0aa; --line: #2a3038; --accent: #5aa6f0; --warn: #e0a451;
+  --stage: radial-gradient(120% 90% at 50% 20%, #2b3138 0%, #171b20 70%, #0f1215 100%);
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f1215; --surface: #171b20; --ink: #e8ecef; --muted: #96a0aa; --line: #2a3038; --accent: #5aa6f0; --warn: #e0a451;
+  --stage: radial-gradient(120% 90% at 50% 20%, #2b3138 0%, #171b20 70%, #0f1215 100%);
+  color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px }
+a { color: var(--accent) }
+.wrap { max-width: 1280px; margin: 0 auto; display: grid; gap: 20px }
+header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px }
+h1 { font-family: var(--display); font-stretch: 112%; font-weight: 800; font-size: clamp(26px, 4vw, 40px); letter-spacing: -0.01em; margin: 0; line-height: 1.05; text-wrap: balance }
+.sub { color: var(--muted); margin: 4px 0 0; max-width: 62ch }
+.chips { display: flex; flex-wrap: wrap; gap: 6px }
+.chip { font: 500 13px var(--body); border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 6px 12px; border-radius: 999px; cursor: pointer }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink) }
+.chip:focus-visible, .item:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+
+.main { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 20px; align-items: start }
+@media (max-width: 860px) { .main { grid-template-columns: minmax(0, 1fr) } .rail { max-height: 260px } }
+
+.rail { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: auto; max-height: 660px }
+.brand { font: 600 11px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 14px 16px 6px; position: sticky; top: 0; background: var(--surface); z-index: 1 }
+.item { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; width: 100%; text-align: left; border: 0; border-top: 1px solid var(--line); background: none; color: var(--ink); padding: 10px 16px; cursor: pointer; font: inherit }
+.item:hover { background: color-mix(in srgb, var(--accent) 7%, transparent) }
+.item[aria-current="true"] { background: color-mix(in srgb, var(--accent) 14%, transparent) }
+.item:disabled { cursor: default; opacity: 0.5 }
+.item b { font-family: var(--display); font-stretch: 105%; font-weight: 700; font-size: 16px }
+.item small { color: var(--muted); font-size: 12px; grid-column: 1 }
+.item .tag { font: 500 11px var(--mono); color: var(--muted); grid-row: 1 / span 2; grid-column: 2; align-self: center; font-variant-numeric: tabular-nums }
+
+.stagecol { display: grid; gap: 12px; min-width: 0 }
+.stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; aspect-ratio: 16 / 9; max-width: 100%; min-height: 300px }
+.stage canvas { display: block; width: 100% !important; height: 100% !important; touch-action: none }
+.overlay { position: absolute; left: 16px; top: 14px; pointer-events: none }
+.overlay .mk { font: 600 11px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted) }
+.overlay .md { font-family: var(--display); font-stretch: 118%; font-weight: 800; font-size: clamp(22px, 3.4vw, 36px); line-height: 1; margin-top: 4px }
+.hint { position: absolute; right: 14px; bottom: 12px; font: 400 12px var(--mono); color: var(--muted); pointer-events: none }
+.loading { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: grid; gap: 8px; justify-items: center; font: 500 13px var(--mono); color: var(--muted) }
+.bar { width: 180px; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden }
+.bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.15s }
+.drop[hidden] { display: none }
+.drop { position: absolute; inset: 0; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 18%, transparent); border: 2px dashed var(--accent); border-radius: 10px; font: 600 16px var(--body); color: var(--ink) }
+
+.plate { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin: 0 }
+.plate > div { padding: 12px 16px; border-left: 1px solid var(--line); min-width: 0 }
+.plate > div:first-child { border-left: 0 }
+.plate dt { font: 600 11px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted) }
+.plate dd { margin: 2px 0 0; font-weight: 600; overflow-wrap: anywhere }
+.plate dd.nc { color: var(--warn) }
+@media (max-width: 600px) { .plate { grid-template-columns: repeat(2, minmax(0, 1fr)) } .plate > div:nth-child(3) { border-left: 0 } .plate > div:nth-child(n+3) { border-top: 1px solid var(--line) } }
+
+.tools { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end }
+.btn { font: 500 13px var(--body); border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 8px 14px; border-radius: 8px; cursor: pointer }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff }
+.foot { color: var(--muted); font-size: 13px; max-width: 80ch }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Bilbibliotek 3D</h1>
+      <p class="sub">Intern testversjon. Modellene er hentet fra Sketchfab og vises i three.js. Dra for å rotere, scroll for å zoome.</p>
+    </div>
+    <div class="chips" id="chips" role="toolbar" aria-label="Filtrer merke"></div>
+  </header>
+
+  <div class="main">
+    <nav class="rail" id="rail" aria-label="Modeller"></nav>
+    <div class="stagecol">
+      <div class="stage" id="stage">
+        <div class="overlay"><div class="mk" id="ovBrand"></div><div class="md" id="ovModel"></div></div>
+        <div class="loading" id="loading" hidden><div class="bar"><i id="barFill"></i></div><span id="loadText">Laster modell</span></div>
+        <div class="hint">dra for å rotere · scroll for zoom</div>
+        <div class="drop" id="drop" hidden>Slipp .glb-filen for å laste den inn</div>
+      </div>
+      <dl class="plate" id="plate"></dl>
+      <div class="tools">
+        <button class="btn" id="reset" type="button">Tilbakestill kamera</button>
+        <button class="btn" id="spin" type="button" aria-pressed="true">Stopp rotasjon</button>
+        <label class="btn primary" for="file">Last inn egen .glb</label>
+        <input id="file" type="file" accept=".glb" hidden>
+      </div>
+      <p class="foot">3D-modellene er laget av Sketchfab-brukere og brukes under lisensene som står oppført ved hver modell. Modeller merket «Ikke-kommersiell» skal bare brukes til intern testing. Bilmerker og design tilhører produsentene.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/environments/RoomEnvironment.js"></script>
+<script>
+const BODY_LABEL = { hatch: "Kombikupé", suv: "SUV", sedan: "Sedan", wagon: "Stasjonsvogn", crossover: "Crossover", van: "Varebil / MPV" };
+const $ = id => document.getElementById(id);
+const stage = $("stage");
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+stage.prepend(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new THREE.RoomEnvironment(), 0.04).texture;
+
+const camera = new THREE.PerspectiveCamera(35, 16 / 9, 0.1, 200);
+const HOME = new THREE.Vector3(6.2, 2.2, 6.4);
+camera.position.copy(HOME);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 0.7, 0);
+controls.enableDamping = true;
+controls.minDistance = 3; controls.maxDistance = 16;
+controls.maxPolarAngle = Math.PI * 0.49;
+controls.autoRotate = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+controls.autoRotateSpeed = 1.0;
+
+const sun = new THREE.DirectionalLight(0xffffff, 1.4);
+sun.position.set(4, 8, 3);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -4, right: 4, top: 4, bottom: -4 });
+scene.add(sun, new THREE.HemisphereLight(0xffffff, 0x444444, 0.35));
+const ground = new THREE.Mesh(new THREE.CircleGeometry(7, 64), new THREE.ShadowMaterial({ opacity: 0.28 }));
+ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true;
+scene.add(ground);
+
+// Normalise any Sketchfab export: longest horizontal side becomes 4.6 m, wheels on the ground, centred.
+function fit(root) {
+  const box = new THREE.Box3().setFromObject(root), size = box.getSize(new THREE.Vector3());
+  root.scale.multiplyScalar(4.6 / Math.max(size.x, size.z));
+  const b = new THREE.Box3().setFromObject(root), c = b.getCenter(new THREE.Vector3());
+  root.position.sub(new THREE.Vector3(c.x, b.min.y, c.z));
+  root.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+  const g = new THREE.Group(); g.add(root); return g;
+}
+
+const loader = new THREE.GLTFLoader();
+const cache = new Map();
+let catalog = [], current = null, state = { brand: "Alle", id: null }, token = 0;
+
+function show(obj) {
+  if (current) scene.remove(current);
+  current = obj; if (obj) scene.add(obj);
+}
+function loading(on, pct, text) {
+  $("loading").hidden = !on;
+  if (pct != null) $("barFill").style.width = pct + "%";
+  if (text) $("loadText").textContent = text;
+}
+
+function select(id) {
+  const car = catalog.find(c => c.id === id);
+  state.id = id; renderRail(); renderPlate(car);
+  $("ovBrand").textContent = car.brand; $("ovModel").textContent = car.model;
+  const my = ++token;
+  if (cache.has(id)) { show(cache.get(id)); return; }
+  show(null); loading(true, 0, "Laster modell");
+  loader.load("models/" + car.file, gltf => {
+    const obj = fit(gltf.scene); cache.set(id, obj);
+    if (my === token) { show(obj); loading(false); }
+  }, e => {
+    if (my === token && e.total) loading(true, Math.round(e.loaded / e.total * 100), `Laster modell · ${(e.loaded / 1e6).toFixed(1)} av ${(e.total / 1e6).toFixed(1)} MB`);
+  }, err => {
+    console.error(err);
+    if (my === token) loading(true, 0, "Fant ikke modellfilen. Kjør scripts/fetch-models.mjs.");
+  });
+}
+
+function renderChips() {
+  const brands = ["Alle", ...new Set(catalog.map(c => c.brand))];
+  $("chips").innerHTML = brands.map(b => `<button class="chip" type="button" aria-pressed="${b === state.brand}">${b}</button>`).join("");
+  [...$("chips").children].forEach((el, i) => el.onclick = () => { state.brand = brands[i]; renderChips(); renderRail(); });
+}
+function renderRail() {
+  const brands = [...new Set(catalog.map(c => c.brand))].filter(b => state.brand === "Alle" || b === state.brand);
+  $("rail").innerHTML = brands.map(b => `<div class="brand">${b}</div>` + catalog.filter(c => c.brand === b).map(c =>
+    `<button class="item" type="button" data-id="${c.id}" aria-current="${c.id === state.id}"><b>${c.model}</b><small>${BODY_LABEL[c.body] || c.body} · ${c.sketchfab.license}</small><span class="tag">${c.commercialUse ? "" : "NC"}</span></button>`).join("")).join("");
+  $("rail").querySelectorAll(".item").forEach(el => el.onclick = () => select(el.dataset.id));
+}
+function renderPlate(car) {
+  const s = car && car.sketchfab;
+  const rows = car ? [
+    ["Karosseri", BODY_LABEL[car.body] || car.body],
+    ["Sketchfab-modell", `<a href="${s.url}" target="_blank" rel="noopener">${s.title}</a>`],
+    ["Laget av", `<a href="${s.authorUrl}" target="_blank" rel="noopener">${s.author}</a>`],
+    ["Lisens", `<a href="${s.licenseUrl}" target="_blank" rel="noopener">${s.license}</a>`, car.commercialUse ? "" : "nc"],
+  ] : [["Kilde", "Egen .glb-fil"], ["Format", "glTF binær"], ["Skalert til", "4,6 m lengde"], ["Lisens", "Ukjent"]];
+  $("plate").innerHTML = rows.map(([k, v, cls]) => `<div><dt>${k}</dt><dd class="${cls || ""}">${v}</dd></div>`).join("");
+}
+
+function loadLocal(file) {
+  const reader = new FileReader();
+  reader.onload = () => loader.parse(reader.result, "", gltf => {
+    token++; state.id = null; show(fit(gltf.scene)); loading(false);
+    $("ovBrand").textContent = "Egen fil"; $("ovModel").textContent = file.name.replace(/\.glb$/i, "");
+    renderRail(); renderPlate(null);
+  }, err => { console.error(err); loading(true, 0, "Kunne ikke lese filen. Bruk en .glb uten Draco-komprimering."); });
+  reader.readAsArrayBuffer(file);
+}
+$("file").onchange = e => e.target.files[0] && loadLocal(e.target.files[0]);
+stage.addEventListener("dragover", e => { e.preventDefault(); $("drop").hidden = false; });
+stage.addEventListener("dragleave", e => { if (!stage.contains(e.relatedTarget)) $("drop").hidden = true; });
+stage.addEventListener("drop", e => { e.preventDefault(); $("drop").hidden = true; const f = e.dataTransfer.files[0]; if (f) loadLocal(f); });
+
+const spinLabel = () => { $("spin").textContent = controls.autoRotate ? "Stopp rotasjon" : "Start rotasjon"; $("spin").setAttribute("aria-pressed", controls.autoRotate); };
+$("spin").onclick = () => { controls.autoRotate = !controls.autoRotate; spinLabel(); };
+$("reset").onclick = () => { camera.position.copy(HOME); controls.target.set(0, 0.7, 0); };
+spinLabel();
+
+function resize() {
+  const { clientWidth: w, clientHeight: h } = stage;
+  renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(stage);
+resize();
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+
+fetch("models/catalog.json").then(r => r.json()).then(data => {
+  catalog = data; renderChips(); select(catalog[0].id);
+}).catch(err => { console.error(err); loading(true, 0, "Fant ikke models/catalog.json"); });
+</script>
