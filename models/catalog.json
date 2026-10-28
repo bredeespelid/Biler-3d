@@ -54,28 +54,6 @@
     "commercialUse": true
   },
   {
-    "id": "vw-id7",
-    "brand": "Volkswagen",
-    "model": "ID.7",
-    "body": "sedan",
-    "file": "vw-id7.glb",
-    "sketchfab": {
-      "uid": "a1356d1767e94341845367e78260537a",
-      "title": "Volkswagen ID.7 2024",
-      "url": "https://sketchfab.com/3d-models/volkswagen-id7-2024-a1356d1767e94341845367e78260537a",
-      "author": "Nieve5677",
-      "authorUrl": "https://sketchfab.com/niev",
-      "license": "CC Attribution",
-      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
-      "faces": 263739
-    },
-    "commercialUse": true,
-    "fix": {
-      "paint": "#1c242c",
-      "recomputeNormals": true
-    }
-  },
-  {
     "id": "vw-tiguan",
     "brand": "Volkswagen",
     "model": "Tiguan",
@@ -166,50 +144,6 @@
     "commercialUse": true,
     "fix": {
       "forceOpaque": true
-    }
-  },
-  {
-    "id": "skoda-elroq",
-    "brand": "Skoda",
-    "model": "Elroq",
-    "body": "suv",
-    "file": "skoda-elroq.glb",
-    "sketchfab": {
-      "uid": "94a583ba82254d368aeae3192ee5d606",
-      "title": "skoda elroq L a K",
-      "url": "https://sketchfab.com/3d-models/skoda-elroq-l-a-k-94a583ba82254d368aeae3192ee5d606",
-      "author": "LaPi022",
-      "authorUrl": "https://sketchfab.com/LaPi022",
-      "license": "Free Standard",
-      "licenseUrl": "https://sketchfab.com/licenses",
-      "faces": 39998
-    },
-    "commercialUse": true,
-    "fix": {
-      "paint": "#24361d",
-      "recomputeNormals": true
-    }
-  },
-  {
-    "id": "skoda-enyaq",
-    "brand": "Skoda",
-    "model": "Enyaq",
-    "body": "suv",
-    "file": "skoda-enyaq.glb",
-    "sketchfab": {
-      "uid": "426bc40471414849a0473168dcb7d32a",
-      "title": "2022 Skoda Enyaq iV",
-      "url": "https://sketchfab.com/3d-models/2022-skoda-enyaq-iv-426bc40471414849a0473168dcb7d32a",
-      "author": "tonielpro520",
-      "authorUrl": "https://sketchfab.com/tonielpro520",
-      "license": "CC Attribution",
-      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
-      "faces": 351063
-    },
-    "commercialUse": true,
-    "fix": {
-      "paint": "#0f2a22",
-      "recomputeNormals": true
     }
   },
   {
