@@ -108,27 +108,6 @@
     "commercialUse": true
   },
   {
-    "id": "audi-a6-avant",
-    "brand": "Audi",
-    "model": "A6 Avant",
-    "body": "wagon",
-    "file": "audi-a6-avant.glb",
-    "sketchfab": {
-      "uid": "0c543362fef5438bbbf7b3d9c1743e73",
-      "title": "Audi A6 Avant",
-      "url": "https://sketchfab.com/3d-models/audi-a6-avant-0c543362fef5438bbbf7b3d9c1743e73",
-      "author": "Nieve5677",
-      "authorUrl": "https://sketchfab.com/niev",
-      "license": "CC Attribution",
-      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
-      "faces": 1361798
-    },
-    "commercialUse": true,
-    "fix": {
-      "forceOpaque": true
-    }
-  },
-  {
     "id": "skoda-octavia-combi",
     "brand": "Skoda",
     "model": "Octavia RS Combi",
