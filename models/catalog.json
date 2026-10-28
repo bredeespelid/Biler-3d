@@ -108,24 +108,6 @@
     "commercialUse": true
   },
   {
-    "id": "audi-q6",
-    "brand": "Audi",
-    "model": "Q6",
-    "body": "suv",
-    "file": "audi-q6.glb",
-    "sketchfab": {
-      "uid": "2667c451516e45a196c0ff75f240e4d7",
-      "title": "Audi Q6",
-      "url": "https://sketchfab.com/3d-models/audi-q6-2667c451516e45a196c0ff75f240e4d7",
-      "author": "xray collection",
-      "authorUrl": "https://sketchfab.com/xray_collection",
-      "license": "CC Attribution",
-      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
-      "faces": 1405063
-    },
-    "commercialUse": true
-  },
-  {
     "id": "audi-a6-avant",
     "brand": "Audi",
     "model": "A6 Avant",
