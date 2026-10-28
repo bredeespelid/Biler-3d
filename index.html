@@ -169,9 +169,9 @@ function applyFix(root, fix = {}) {
 
 // Normalise any Sketchfab export: longest horizontal side becomes 4.6 m, wheels on the ground, centred.
 function fit(root) {
-  const box = new THREE.Box3().setFromObject(root), size = box.getSize(new THREE.Vector3());
+  const box = new THREE.Box3().setFromObject(root, true), size = box.getSize(new THREE.Vector3());
   root.scale.multiplyScalar(4.6 / Math.max(size.x, size.z));
-  const b = new THREE.Box3().setFromObject(root), c = b.getCenter(new THREE.Vector3());
+  const b = new THREE.Box3().setFromObject(root, true), c = b.getCenter(new THREE.Vector3());
   root.position.sub(new THREE.Vector3(c.x, b.min.y, c.z));
   root.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
   const g = new THREE.Group(); g.add(root); return g;

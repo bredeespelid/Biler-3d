@@ -18,6 +18,24 @@
     "commercialUse": true
   },
   {
+    "id": "vw-id3",
+    "brand": "Volkswagen",
+    "model": "ID.3",
+    "body": "hatch",
+    "file": "vw-id3.glb",
+    "sketchfab": {
+      "uid": "869fe1b400104f45b9a51df73222b7c4",
+      "title": "Volkswagen ID.3 Pro (2024)",
+      "url": "https://sketchfab.com/3d-models/volkswagen-id3-pro-2024-869fe1b400104f45b9a51df73222b7c4",
+      "author": "geyges",
+      "authorUrl": "https://sketchfab.com/geyges",
+      "license": "Free Standard",
+      "licenseUrl": "https://sketchfab.com/licenses",
+      "faces": 440685
+    },
+    "commercialUse": true
+  },
+  {
     "id": "vw-id4",
     "brand": "Volkswagen",
     "model": "ID.4",
