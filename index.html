@@ -178,6 +178,8 @@ function fit(root) {
 }
 
 const loader = new THREE.GLTFLoader();
+// Load embedded textures through <img> instead of fetch(blob:), which strict CSPs (artifacts, Code Apps) can block.
+loader.register(parser => { parser.textureLoader = new THREE.TextureLoader(parser.options.manager); return { name: "img_textures" }; });
 const cache = new Map();
 let catalog = [], current = null, state = { brand: "Alle", id: null }, token = 0;
 
@@ -199,17 +201,30 @@ function select(id) {
   if (cache.has(id)) { show(cache.get(id)); return; }
   show(null); loading(true, 0, "Laster modell");
   let done = false;
-  loader.load("models/" + car.file, gltf => {
+  const fail = err => {
+    console.error(err);
+    if (my === token) loading(true, 0, "Kunne ikke laste modellen. Prøv igjen, eller kjør scripts/fetch-models.mjs.");
+  };
+  const file = new THREE.FileLoader().setResponseType("arraybuffer");
+  file.load("models/" + car.file, buf => {
     done = true;
-    applyFix(gltf.scene, car.fix);
-    const obj = fit(gltf.scene); cache.set(id, obj);
-    if (my === token) { show(obj); loading(false); }
+    if (my === token) loading(true, 100, "Bygger modell");
+    // Artifact-utgaven pakker GLB-en som base64 i JSON ({"glb": "..."}), fordi .glb ikke kan publiseres der.
+    if (car.file.endsWith(".json")) buf = base64ToBuffer(JSON.parse(new TextDecoder().decode(buf)).glb);
+    loader.parse(buf, "", gltf => {
+      applyFix(gltf.scene, car.fix);
+      const obj = fit(gltf.scene); cache.set(id, obj);
+      if (my === token) { show(obj); loading(false); }
+    }, fail);
   }, e => {
     if (!done && my === token && e.total) loading(true, Math.round(e.loaded / e.total * 100), `Laster modell · ${(e.loaded / 1e6).toFixed(1)} av ${(e.total / 1e6).toFixed(1)} MB`);
-  }, err => {
-    console.error(err);
-    if (my === token) loading(true, 0, "Fant ikke modellfilen. Kjør scripts/fetch-models.mjs.");
-  });
+  }, fail);
+}
+
+function base64ToBuffer(b64) {
+  const bin = atob(b64), bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes.buffer;
 }
 
 function renderChips() {
