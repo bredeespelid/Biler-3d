@@ -1,0 +1,254 @@
+[
+  {
+    "id": "vw-golf",
+    "brand": "Volkswagen",
+    "model": "Golf",
+    "body": "hatch",
+    "file": "vw-golf.glb",
+    "sketchfab": {
+      "uid": "e87d7c0f8937481db236529beb5ecab7",
+      "title": "Volkswagen Golf 8. GTI (A8)",
+      "url": "https://sketchfab.com/3d-models/volkswagen-golf-8-gti-a8-e87d7c0f8937481db236529beb5ecab7",
+      "author": "Mona x Supercars",
+      "authorUrl": "https://sketchfab.com/Car2022",
+      "license": "CC Attribution",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "faces": 120641
+    },
+    "commercialUse": true
+  },
+  {
+    "id": "vw-id4",
+    "brand": "Volkswagen",
+    "model": "ID.4",
+    "body": "suv",
+    "file": "vw-id4.glb",
+    "sketchfab": {
+      "uid": "20d27c97c31043e8a3d1baa279597253",
+      "title": "Volkswagen ID.4 Pro (2025)",
+      "url": "https://sketchfab.com/3d-models/volkswagen-id4-pro-2025-20d27c97c31043e8a3d1baa279597253",
+      "author": "geyges",
+      "authorUrl": "https://sketchfab.com/geyges",
+      "license": "Free Standard",
+      "licenseUrl": "https://sketchfab.com/licenses",
+      "faces": 501681
+    },
+    "commercialUse": true
+  },
+  {
+    "id": "vw-id7",
+    "brand": "Volkswagen",
+    "model": "ID.7",
+    "body": "sedan",
+    "file": "vw-id7.glb",
+    "sketchfab": {
+      "uid": "a1356d1767e94341845367e78260537a",
+      "title": "Volkswagen ID.7 2024",
+      "url": "https://sketchfab.com/3d-models/volkswagen-id7-2024-a1356d1767e94341845367e78260537a",
+      "author": "Nieve5677",
+      "authorUrl": "https://sketchfab.com/niev",
+      "license": "CC Attribution",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "faces": 263739
+    },
+    "commercialUse": true
+  },
+  {
+    "id": "vw-tiguan",
+    "brand": "Volkswagen",
+    "model": "Tiguan",
+    "body": "suv",
+    "file": "vw-tiguan.glb",
+    "sketchfab": {
+      "uid": "18333bf2a9564772917ae8a349b81e62",
+      "title": "Volkswagen Tiguan (2025)",
+      "url": "https://sketchfab.com/3d-models/volkswagen-tiguan-2025-18333bf2a9564772917ae8a349b81e62",
+      "author": "geyges",
+      "authorUrl": "https://sketchfab.com/geyges",
+      "license": "Free Standard",
+      "licenseUrl": "https://sketchfab.com/licenses",
+      "faces": 390614
+    },
+    "commercialUse": true
+  },
+  {
+    "id": "vw-id-buzz",
+    "brand": "Volkswagen",
+    "model": "ID. Buzz",
+    "body": "van",
+    "file": "vw-id-buzz.glb",
+    "sketchfab": {
+      "uid": "b600c44ffb5741feb0aa7faadb2db9d7",
+      "title": "Volkswagen ID. Buzz",
+      "url": "https://sketchfab.com/3d-models/volkswagen-id-buzz-b600c44ffb5741feb0aa7faadb2db9d7",
+      "author": "geyges",
+      "authorUrl": "https://sketchfab.com/geyges",
+      "license": "Free Standard",
+      "licenseUrl": "https://sketchfab.com/licenses",
+      "faces": 609227
+    },
+    "commercialUse": true
+  },
+  {
+    "id": "audi-q4-etron",
+    "brand": "Audi",
+    "model": "Q4 e-tron",
+    "body": "suv",
+    "file": "audi-q4-etron.glb",
+    "sketchfab": {
+      "uid": "5d34f3e7141d4562b4f0c257ff54326b",
+      "title": "2022 Audi Q4 e-tron",
+      "url": "https://sketchfab.com/3d-models/2022-audi-q4-e-tron-5d34f3e7141d4562b4f0c257ff54326b",
+      "author": "tonielpro520",
+      "authorUrl": "https://sketchfab.com/tonielpro520",
+      "license": "CC Attribution",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "faces": 466416
+    },
+    "commercialUse": true
+  },
+  {
+    "id": "audi-q6",
+    "brand": "Audi",
+    "model": "Q6",
+    "body": "suv",
+    "file": "audi-q6.glb",
+    "sketchfab": {
+      "uid": "2667c451516e45a196c0ff75f240e4d7",
+      "title": "Audi Q6",
+      "url": "https://sketchfab.com/3d-models/audi-q6-2667c451516e45a196c0ff75f240e4d7",
+      "author": "xray collection",
+      "authorUrl": "https://sketchfab.com/xray_collection",
+      "license": "CC Attribution",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "faces": 1405063
+    },
+    "commercialUse": true
+  },
+  {
+    "id": "audi-a6-avant",
+    "brand": "Audi",
+    "model": "A6 Avant",
+    "body": "wagon",
+    "file": "audi-a6-avant.glb",
+    "sketchfab": {
+      "uid": "0c543362fef5438bbbf7b3d9c1743e73",
+      "title": "Audi A6 Avant",
+      "url": "https://sketchfab.com/3d-models/audi-a6-avant-0c543362fef5438bbbf7b3d9c1743e73",
+      "author": "Nieve5677",
+      "authorUrl": "https://sketchfab.com/niev",
+      "license": "CC Attribution",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "faces": 1361798
+    },
+    "commercialUse": true
+  },
+  {
+    "id": "skoda-elroq",
+    "brand": "Skoda",
+    "model": "Elroq",
+    "body": "suv",
+    "file": "skoda-elroq.glb",
+    "sketchfab": {
+      "uid": "3f811328cb474a09bd639251180618fb",
+      "title": "Skoda_elroq_body_s24_20240927",
+      "url": "https://sketchfab.com/3d-models/skoda-elroq-body-s24-20240927-3f811328cb474a09bd639251180618fb",
+      "author": "alekspopov875",
+      "authorUrl": "https://sketchfab.com/alekspopov875",
+      "license": "CC Attribution",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "faces": 224762
+    },
+    "commercialUse": true
+  },
+  {
+    "id": "skoda-enyaq",
+    "brand": "Skoda",
+    "model": "Enyaq",
+    "body": "suv",
+    "file": "skoda-enyaq.glb",
+    "sketchfab": {
+      "uid": "14ba0655029a48219b41030fd259104e",
+      "title": "Skoda Enyaq",
+      "url": "https://sketchfab.com/3d-models/skoda-enyaq-14ba0655029a48219b41030fd259104e",
+      "author": "Nieve5677",
+      "authorUrl": "https://sketchfab.com/niev",
+      "license": "CC Attribution",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "faces": 353424
+    },
+    "commercialUse": true
+  },
+  {
+    "id": "skoda-octavia-combi",
+    "brand": "Skoda",
+    "model": "Octavia RS Combi",
+    "body": "wagon",
+    "file": "skoda-octavia-combi.glb",
+    "sketchfab": {
+      "uid": "e584bb09fa6547a0a3ca7c1ec7c2053a",
+      "title": "2025 Skoda Octavia RS Combi",
+      "url": "https://sketchfab.com/3d-models/2025-skoda-octavia-rs-combi-e584bb09fa6547a0a3ca7c1ec7c2053a",
+      "author": "tonielpro520",
+      "authorUrl": "https://sketchfab.com/tonielpro520",
+      "license": "CC Attribution",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "faces": 1616859
+    },
+    "commercialUse": true
+  },
+  {
+    "id": "cupra-formentor",
+    "brand": "Cupra",
+    "model": "Formentor",
+    "body": "crossover",
+    "file": "cupra-formentor.glb",
+    "sketchfab": {
+      "uid": "3674038309c84faa86c3be4642db2c27",
+      "title": "Cupra Formentor 2021",
+      "url": "https://sketchfab.com/3d-models/cupra-formentor-2021-3674038309c84faa86c3be4642db2c27",
+      "author": "Sloftm_Carz",
+      "authorUrl": "https://sketchfab.com/SLBofficial",
+      "license": "CC Attribution",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "faces": 1644165
+    },
+    "commercialUse": true
+  },
+  {
+    "id": "cupra-born",
+    "brand": "Cupra",
+    "model": "Born",
+    "body": "hatch",
+    "file": "cupra-born.glb",
+    "sketchfab": {
+      "uid": "c41e05dde4244592898e62fae766e8a8",
+      "title": "2022-2024 Cupra Born",
+      "url": "https://sketchfab.com/3d-models/2022-2024-cupra-born-c41e05dde4244592898e62fae766e8a8",
+      "author": "BloxBloger",
+      "authorUrl": "https://sketchfab.com/BloxBloger",
+      "license": "CC Attribution-NonCommercial",
+      "licenseUrl": "http://creativecommons.org/licenses/by-nc/4.0/",
+      "faces": 1437353
+    },
+    "commercialUse": false
+  },
+  {
+    "id": "cupra-tavascan",
+    "brand": "Cupra",
+    "model": "Tavascan",
+    "body": "crossover",
+    "file": "cupra-tavascan.glb",
+    "sketchfab": {
+      "uid": "d984b390589c43e691ce6459dcc140cd",
+      "title": "2025 Cupra Tavascan",
+      "url": "https://sketchfab.com/3d-models/2025-cupra-tavascan-d984b390589c43e691ce6459dcc140cd",
+      "author": "BloxBloger",
+      "authorUrl": "https://sketchfab.com/BloxBloger",
+      "license": "CC Attribution-NonCommercial",
+      "licenseUrl": "http://creativecommons.org/licenses/by-nc/4.0/",
+      "faces": 1765744
+    },
+    "commercialUse": false
+  }
+]
